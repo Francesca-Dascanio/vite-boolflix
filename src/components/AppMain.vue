@@ -11,12 +11,25 @@ export default {
     methods: {
         getFlag: function (movie) {
 
-            console.log(movie);
+            console.log(movie.original_language);
 
             if (movie.original_language == 'en') {
-                const language = document.getElementById('li');
-                console.log(language);
-                // language.classList.add('fi-gb');
+                return 'fi-gb'
+            }
+            else if (movie.original_language == 'it') {
+                return 'fi-it'
+            }
+            else if (movie.original_language == 'es') {
+                return 'fi-es'
+            }
+            else if (movie.original_language == 'ja') {
+                return 'fi-jp'
+            }
+            else if (movie.original_language == 'fr') {
+                return 'fi-fr'
+            }
+            else {
+                return 'flag-neutral'
             }
         }
     }
@@ -26,7 +39,11 @@ export default {
 
 <template>
 
-    <div class="card-movie" v-for="movie, index in store.movies">
+    <div id="prova">
+
+    </div>
+
+    <div id="card" class="card-movie" v-for="movie, index in store.movies">
         <!-- Qui ci andaranno le informazioni per ogni film -->
         MOVIE - Informazioni
         <ul>
@@ -38,11 +55,8 @@ export default {
             </li>
             <li>
                 Lingua: 
-                <span class="fi" :class="movie.original_language == 'en' ? 'fi-gb' : '' "> 
-
+                <span class="fi" :class=" getFlag (movie)"> 
                 </span>
-                <!-- Lingua: {{ movie.original_language }} -->
-                <!-- Lingua: {{ getFlag(movie) }} -->
             </li>
             <li>
                 Voto: {{ movie.vote_average }}
@@ -58,8 +72,12 @@ export default {
         margin: 1rem;
         padding: 1rem;
         width: 50%;
-        height: 100px;
+        height: 150px;
         border: 1px dashed black;
+
+        .flag-neutral {
+            background-image: url('https://via.placeholder.com/200x150');
+        }
     }
 
 </style>
