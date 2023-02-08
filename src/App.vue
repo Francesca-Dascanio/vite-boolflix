@@ -31,6 +31,7 @@ export default {
                 .then((response) => {
                     this.store.movies = response.data.results;
                     console.log(this.store.movies);
+                    
                 });
         }
     },

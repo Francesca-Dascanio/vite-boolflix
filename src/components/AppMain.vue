@@ -7,6 +7,18 @@ export default {
         return {
             store
         }
+    },
+    methods: {
+        getFlag: function (movie) {
+
+            console.log(movie);
+
+            if (movie.original_language == 'en') {
+                const language = document.getElementById('li');
+                console.log(language);
+                // language.classList.add('fi-gb');
+            }
+        }
     }
 }
 
@@ -25,7 +37,12 @@ export default {
                 Titolo originale: {{ movie.original_title }}
             </li>
             <li>
-                Lingua: {{ movie.original_language }}
+                Lingua: 
+                <span class="fi" :class="movie.original_language == 'en' ? 'fi-gb' : '' "> 
+
+                </span>
+                <!-- Lingua: {{ movie.original_language }} -->
+                <!-- Lingua: {{ getFlag(movie) }} -->
             </li>
             <li>
                 Voto: {{ movie.vote_average }}
