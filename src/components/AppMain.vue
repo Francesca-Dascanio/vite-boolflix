@@ -60,13 +60,14 @@ export default {
 
 <template>
 
-    <div id="prova">
-
-    </div>
-
     <div class="card-movie" v-for="movie, index in store.movies">
         <!-- Qui ci andaranno le informazioni per ogni film -->
-        MOVIE - Informazioni
+        <div>
+            MOVIE - Informazioni
+        </div>
+        <div>
+            <img :src="store.urlFirst + movie.poster_path" :alt="movie.title">
+        </div>
         <ul>
             <li>
                 Titolo: {{ movie.title }}
@@ -113,8 +114,7 @@ export default {
     .card-movie {
         margin: 1rem;
         padding: 1rem;
-        width: 50%;
-        height: 150px;
+        width: 30%;
         border: 1px dashed black;
 
         .flag-neutral {
@@ -125,8 +125,7 @@ export default {
     .card-series {
         margin: 1rem;
         padding: 1rem;
-        width: 50%;
-        height: 150px;
+        width: 30%;
         border: 1px dashed black;
 
         .flag-neutral {
