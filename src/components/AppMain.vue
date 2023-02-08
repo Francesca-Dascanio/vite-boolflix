@@ -9,7 +9,7 @@ export default {
         }
     },
     methods: {
-        getFlag: function (movie) {
+        getMovieFlag: function (movie) {
 
             console.log(movie.original_language);
 
@@ -31,7 +31,28 @@ export default {
             else {
                 return 'flag-neutral'
             }
-        }
+        },
+        getSeriesFlag: function (serie) {
+
+            if (serie.original_language == 'en') {
+                return 'fi-gb'
+            }
+            else if (serie.original_language == 'it') {
+                return 'fi-it'
+            }
+            else if (serie.original_language == 'es') {
+                return 'fi-es'
+            }
+            else if (serie.original_language == 'ja') {
+                return 'fi-jp'
+            }
+            else if (serie.original_language == 'fr') {
+                return 'fi-fr'
+            }
+            else {
+                return 'flag-neutral'
+            }
+            }
     }
 }
 
@@ -43,7 +64,7 @@ export default {
 
     </div>
 
-    <div id="card" class="card-movie" v-for="movie, index in store.movies">
+    <div class="card-movie" v-for="movie, index in store.movies">
         <!-- Qui ci andaranno le informazioni per ogni film -->
         MOVIE - Informazioni
         <ul>
@@ -55,11 +76,32 @@ export default {
             </li>
             <li>
                 Lingua: 
-                <span class="fi" :class=" getFlag (movie)"> 
+                <span class="fi" :class=" getMovieFlag (movie)"> 
                 </span>
             </li>
             <li>
                 Voto: {{ movie.vote_average }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-series" v-for="serie, index in store.series">
+        <!-- Qui ci andaranno le informazioni per ogni film -->
+        TV SERIES - Informazioni
+        <ul>
+            <li>
+                Titolo: {{ serie.name }}
+            </li>
+            <li>
+                Titolo originale: {{ serie.original_name }}
+            </li>
+            <li>
+                Lingua: 
+                <span class="fi" :class=" getSeriesFlag (serie)"> 
+                </span>
+            </li>
+            <li>
+                Voto: {{ serie.vote_average }}
             </li>
         </ul>
     </div>
@@ -69,6 +111,18 @@ export default {
 <style lang="scss" scoped>
 
     .card-movie {
+        margin: 1rem;
+        padding: 1rem;
+        width: 50%;
+        height: 150px;
+        border: 1px dashed black;
+
+        .flag-neutral {
+            background-image: url('https://via.placeholder.com/200x150');
+        }
+    }
+
+    .card-series {
         margin: 1rem;
         padding: 1rem;
         width: 50%;

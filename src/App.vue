@@ -23,7 +23,7 @@ export default {
 
             // Chiamata all'API da App
             axios
-                .get('https://api.themoviedb.org/3/search/movie?api_key=29ab9f66293ac69d30701ab20d25cec2', {
+                .get('https://api.themoviedb.org/3/search/movie' + this.store.apiKey, {
                     params: {
                         query: this.store.inputSearch,
                     }
@@ -33,7 +33,22 @@ export default {
                     console.log(this.store.movies);
                     
                 });
-        }
+        },
+        getSeries: function () {
+
+            // Chiamata all'API da App
+            axios
+                .get('https://api.themoviedb.org/3/search/tv' + this.store.apiKey, {
+                    params: {
+                        query: this.store.inputSearch,
+                    }
+                })
+                .then((response) => {
+                    this.store.series = response.data.results;
+                    console.log(this.store.series);
+                    
+                });
+            }
     },
     created () {
         
@@ -45,7 +60,7 @@ export default {
 
 <template>
 
-    <AppHeader @search="getMovies()" />
+    <AppHeader @search="getMovies(), getSeries()"/>
 
     <AppMain />
 
