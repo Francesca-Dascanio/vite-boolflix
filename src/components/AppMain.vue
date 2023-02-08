@@ -52,7 +52,13 @@ export default {
             else {
                 return 'flag-neutral'
             }
-            }
+        },
+        // Prova trasformazione voto di movie --> il range iniziale è da 0 a 10 non da 1 a 10 (da risolvere)
+        changeVote: function (movie) {
+           
+           return Math.ceil((movie.vote_average + 1)/ 2);
+
+        }
     }
 }
 
@@ -77,18 +83,26 @@ export default {
             </li>
             <li>
                 Lingua: 
-                <span class="fi" :class=" getMovieFlag (movie)"> 
+                <span class="fi" :class="getMovieFlag (movie)"> 
                 </span>
             </li>
-            <li>
+            <!-- <li>
                 Voto: {{ movie.vote_average }}
+            </li> -->
+            <li>
+                Voto: {{ changeVote(movie) }}
             </li>
         </ul>
     </div>
 
     <div class="card-series" v-for="serie, index in store.series">
         <!-- Qui ci andaranno le informazioni per ogni film -->
-        TV SERIES - Informazioni
+        <div>
+            TV SERIES - Informazioni
+        </div>
+        <div>
+            <img :src="store.urlFirst + serie.poster_path" :alt="serie.title">
+        </div>
         <ul>
             <li>
                 Titolo: {{ serie.name }}
