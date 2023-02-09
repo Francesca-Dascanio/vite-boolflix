@@ -25,14 +25,15 @@ export default {
 
         },
         getPoster: function (obj) {
-            if (obj.poster_path == obj.poster_path + 'null') {
-                // Non funziona perchè null è dentro obj.poster_path --> da sistemare
+
+            if (obj.poster_path == null) {
                 return 'https://via.placeholder.com/342x513';
                 
             }
             else {
                 return this.store.urlFirst + obj.poster_path;
             }
+
         },
         getStars: function (item, obj) {
 
@@ -85,12 +86,12 @@ export default {
     </div>
 
     <div class="card-series" v-for="serie, index in store.series">
-        <!-- Qui ci andaranno le informazioni per ogni film -->
+        <!-- Qui ci andaranno le informazioni per ogni serie -->
         <div>
             TV SERIES - Informazioni
         </div>
         <div>
-            <img :src="store.urlFirst + serie.poster_path" :alt="serie.title">
+            <img :src="getPoster(serie)" :alt="serie.title">
         </div>
         <ul>
             <li>
