@@ -19,26 +19,11 @@ export default {
         }
     },
     methods: {
-        getMovies: function () {
+        getSearch: function (what) {
 
             // Chiamata all'API da App
             axios
-                .get('https://api.themoviedb.org/3/search/movie' + this.store.apiKey, {
-                    params: {
-                        query: this.store.inputSearch,
-                    }
-                })
-                .then((response) => {
-                    this.store.movies = response.data.results;
-                    console.log(this.store.movies);
-                    
-                });
-        },
-        getSeries: function () {
-
-            // Chiamata all'API da App
-            axios
-                .get('https://api.themoviedb.org/3/search/tv' + this.store.apiKey, {
+                .get('https://api.themoviedb.org/3/search/'+ what + this.store.apiKey, {
                     params: {
                         query: this.store.inputSearch,
                     }
@@ -48,7 +33,7 @@ export default {
                     console.log(this.store.series);
                     
                 });
-            }
+        }
     },
     created () {
         
@@ -60,12 +45,9 @@ export default {
 
 <template>
 
-    <AppHeader @search="getMovies(), getSeries()"/>
+    <AppHeader @search="getSearch('tv'), getSearch('movie')"/>
 
     <AppMain />
-
-    <!-- <font-awesome-icon icon="fa-solid fa-star" />
-    <font-awesome-icon icon="fa-regular fa-star" /> -->
 
 </template>
 

@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store';
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default {
     name: 'AppMain',
@@ -15,20 +16,11 @@ export default {
             if (object.original_language == 'en') {
                 return 'fi-gb'
             }
-            else if (object.original_language == 'it') {
-                return 'fi-it'
-            }
-            else if (object.original_language == 'es') {
-                return 'fi-es'
-            }
             else if (object.original_language == 'ja') {
                 return 'fi-jp'
             }
-            else if (object.original_language == 'fr') {
-                return 'fi-fr'
-            }
             else {
-                return 'flag-neutral'
+                return `fi-${object.original_language}`;
             }
 
         },
