@@ -73,6 +73,7 @@ export default {
 @use '../styles/partials/variables.scss' as *;
 @use '../styles/partials/mixins.scss' as *;
 
+
 .nav-1 {
 
     width: 70%;

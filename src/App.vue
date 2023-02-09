@@ -23,14 +23,23 @@ export default {
 
             // Chiamata all'API da App
             axios
-                .get('https://api.themoviedb.org/3/search/'+ what + this.store.apiKey, {
+                .get('https://api.themoviedb.org/3/search/'+ what, {
                     params: {
-                        query: this.store.inputSearch,
+                        api_key: this.store.apiKey,
+                        query: this.store.inputSearch
                     }
                 })
                 .then((response) => {
-                    this.store.series = response.data.results;
-                    console.log(this.store.series);
+
+                    if (what == 'movie') {
+                        this.store.movies = response.data.results;
+                        console.log(this.store.movies);
+                    }
+                    else {
+                        this.store.series = response.data.results;
+                        console.log(this.store.series);
+                    }
+                    
                     
                 });
         }
@@ -46,13 +55,19 @@ export default {
 
 <template>
 
-    <AppHeader @search="getSearch('tv'), getSearch('movie')"/>
+    <div>
+        <AppHeader @search="getSearch('tv'), getSearch('movie')"/>
 
-    <AppMain />
+        <AppMain />
+    </div>
 
 </template>
 
 <style lang="scss">
 @import './styles/main.scss';
+
+div {
+    background-color: $dark-color;
+}
 
 </style>

@@ -56,11 +56,11 @@ export default {
 <template>
 
     <main>
-        <div class="bg-color">
+        <div>
             <div class="container">
-                Results
+                Results:
             </div>
-            <div class="container flex wrap">
+            <div class="flex wrap">
                 <!-- CARD - DATI MOVIES -->
                 <div class="card" v-for="movie, index in store.movies">
                     <div>
@@ -69,7 +69,10 @@ export default {
                     </div>
                     <ul>
                         <li>
-                            Titolo: {{ movie.title }}
+                            Titolo: 
+                            <span>
+                                {{ movie.title }}
+                            </span>
                         </li>
                         <li>
                             Titolo originale: {{ movie.original_title }}
@@ -139,7 +142,7 @@ export default {
                 border: 1px solid $light-color;
 
                 .img-container {
-                    width: 100%;
+                    width: 80%;
 
                     img {
                         width: 100%;
