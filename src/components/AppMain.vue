@@ -56,69 +56,77 @@ export default {
 <template>
 
     <main>
-        <div>
-            <div class="container">
-                Results:
-            </div>
-            <div class="flex wrap">
-                <!-- CARD - DATI MOVIES -->
-                <div class="card" v-for="movie, index in store.movies">
-                    <div>
-                        <!-- <img :src="store.urlFirst + movie.poster_path" :alt="movie.title"> -->
-                        <img :src="getPoster(movie)" :alt="movie.title">
-                    </div>
-                    <ul>
-                        <li>
-                            Titolo: 
-                            <span>
-                                {{ movie.title }}
-                            </span>
-                        </li>
-                        <li>
-                            Titolo originale: {{ movie.original_title }}
-                        </li>
-                        <li>
-                            Lingua: 
-                            <span class="fi" :class="getFlag (movie)"> 
-                            </span>
-                        </li>
-                        <li>
-                            Voto: 
-                            <span v-for="item in stars">
-                                <font-awesome-icon :icon="getStars(item, movie)" /> 
-                            </span>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container">
+            Results:
+        </div>
 
-                <!-- CARD - DATI SERIES -->
-                <div class="card" v-for="serie, index in store.series">
-                    <div class="img-container">
-                        <img :src="getPoster(serie)" :alt="serie.title">
-                    </div>
-                    <ul>
-                        <li>
-                            Titolo: {{ serie.name }}
-                        </li>
-                        <li>
-                            Titolo originale: {{ serie.original_name }}
-                        </li>
-                        <li>
-                            Lingua: 
-                            <span class="fi" :class=" getFlag (serie)"> 
-                            </span>
-                        </li>
-                        <li>
-                            Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
-                        </li>
-                        <li>
-                            Voto: 
-                            <span v-for="item in stars">
-                                <font-awesome-icon :icon="getStars(item, serie)" /> 
-                            </span>
-                        </li>
-                    </ul>
+        <div class="container flex overflow">
+            <!-- CARD - DATI MOVIES -->
+            <div class="card" v-for="movie, index in store.movies">
+                <div>
+                    <!-- <img :src="store.urlFirst + movie.poster_path" :alt="movie.title"> -->
+                    <img :src="getPoster(movie)" :alt="movie.title">
                 </div>
+                <ul class="not-list-style">
+                    <li>
+                        Titolo: 
+                        <span>
+                            {{ movie.title }}
+                        </span>
+                    </li>
+                    <li>
+                        Titolo originale: 
+                        <span>
+                            {{ movie.original_title }}
+                        </span>
+                    </li>
+                    <li>
+                        Lingua: 
+                        <span class="fi" :class="getFlag (movie)"> 
+                        </span>
+                    </li>
+                    <li>
+                        Voto: 
+                        <span v-for="item in stars">
+                            <font-awesome-icon :icon="getStars(item, movie)" /> 
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CARD - DATI SERIES -->
+            <div class="card" v-for="serie, index in store.series">
+                <div class="img-container">
+                    <img :src="getPoster(serie)" :alt="serie.title">
+                </div>
+                <ul class="not-list-style">
+                    <li>
+                        Titolo: 
+                        <span>
+                            {{ serie.name }}
+                        </span>
+                    </li>
+                    <li>
+                        Titolo originale: 
+                        <span>
+                            {{ serie.original_name }}
+                        </span>
+                    </li>
+                    <li>
+                        Lingua: 
+                        <span class="fi" :class=" getFlag (serie)"> 
+                        </span>
+                    </li>
+                    <li>
+                        Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
+                    </li>
+                    <li>
+                        Voto: 
+                        <span v-for="item in stars">
+                            <font-awesome-icon :icon="getStars(item, serie)" /> 
+                        </span>
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
@@ -130,22 +138,30 @@ export default {
 
     main {
         color: $light-color;
+        width: 100%;
+        height: calc(100vh - 150px);
 
-        div {
-            div {
-                padding: 0.5rem;
-            }
+        > div:first-child {
+            height: auto;
+            padding: 0.5rem 1rem;
+        }
 
+        > div:last-child {
+            height: auto;
+    
             .card {
-                padding: 1rem;
-                width: calc((100% / 5) - 10px);
-                border: 1px solid $light-color;
+
+                border: 1px solid black;
+                border-right: 0.5px;
 
                 .img-container {
-                    width: 80%;
+                    max-width: 342px;
+                    min-height: 655px;
 
                     img {
-                        width: 100%;
+                        max-width: 100%;
+                        height: auto;
+                        object-fit: cover;
                     }
                 }
             }

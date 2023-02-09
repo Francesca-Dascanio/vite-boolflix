@@ -36,7 +36,7 @@ export default {
 
     <header>
 
-        <nav class="bg-color">
+        <nav>
             <div class="container flex justify-content-btw align-items-center">
                 <div class="nav-1">
                     <ul class="not-list-style flex align-items-center" >
@@ -73,46 +73,57 @@ export default {
 @use '../styles/partials/variables.scss' as *;
 @use '../styles/partials/mixins.scss' as *;
 
+header {
+    width: 100%;
+    height: 100px;
 
-.nav-1 {
+    nav {
+        > div {
+            height: 100%;
 
-    width: 70%;
+            .nav-1 {
+                width: 70%;
+                height: 100%;
 
-    li:first-child {
+                li:first-child {
+                    padding: 0;
+                    width: 20%;
 
-        padding: 0;
-        width: 20%;
+                        img {
+                            width: 100%;
+                        }
+                }
 
-        img {
-            width: 100%;
+                li {
+                    padding: 2rem 1rem;
+
+                        a {
+                            font-size: 0.8rem;
+                        }
+                }
+            }
+
+            .nav-2 {
+
+            width: 30%;
+            height: 100%;
+
+                form {
+                    padding: 1rem 0 1rem 1rem;
+
+                    input {
+                        @include input
+                    }
+
+                    button {
+                        @include button
+                    }
+                }
+            }
+
         }
     }
-
-    li {
-        padding: 2rem 1rem;
-
-        a {
-            font-size: 0.8rem;
-        }
-    }
-
 }
 
-.nav-2 {
-
-    width: 30%;
-
-    form {
-        padding: 1rem 0 1rem 1rem;
-
-        input {
-            @include input
-        }
-
-        button {
-            @include button
-        }
-    }
-}
 
 </style>

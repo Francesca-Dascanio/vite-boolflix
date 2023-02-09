@@ -31,8 +31,8 @@ a {
     align-items: center;
 }
 
-.wrap {
-    flex-wrap: wrap;
+.overflow {
+    overflow-x: auto;
 }
 
 .not-list-style {
