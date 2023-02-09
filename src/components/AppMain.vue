@@ -55,88 +55,99 @@ export default {
 
 <template>
 
-    <div class="card-movie" v-for="movie, index in store.movies">
-        <!-- Qui ci andaranno le informazioni per ogni film -->
-        <div>
-            MOVIE - Informazioni
-        </div>
-        <div>
-            <!-- <img :src="store.urlFirst + movie.poster_path" :alt="movie.title"> -->
-            <img :src="getPoster(movie)" :alt="movie.title">
-        </div>
-        <ul>
-            <li>
-                Titolo: {{ movie.title }}
-            </li>
-            <li>
-                Titolo originale: {{ movie.original_title }}
-            </li>
-            <li>
-                Lingua: 
-                <span class="fi" :class="getFlag (movie)"> 
-                </span>
-            </li>
-            <li>
-                Voto: 
-                <span v-for="item in stars">
-                    <font-awesome-icon :icon="getStars(item, movie)" /> 
-                </span>
-            </li>
-        </ul>
-    </div>
+    <main>
+        <div class="bg-color">
+            <div class="container">
+                Results
+            </div>
+            <div class="container flex wrap">
+                <!-- CARD - DATI MOVIES -->
+                <div class="card" v-for="movie, index in store.movies">
+                    <div>
+                        <!-- <img :src="store.urlFirst + movie.poster_path" :alt="movie.title"> -->
+                        <img :src="getPoster(movie)" :alt="movie.title">
+                    </div>
+                    <ul>
+                        <li>
+                            Titolo: {{ movie.title }}
+                        </li>
+                        <li>
+                            Titolo originale: {{ movie.original_title }}
+                        </li>
+                        <li>
+                            Lingua: 
+                            <span class="fi" :class="getFlag (movie)"> 
+                            </span>
+                        </li>
+                        <li>
+                            Voto: 
+                            <span v-for="item in stars">
+                                <font-awesome-icon :icon="getStars(item, movie)" /> 
+                            </span>
+                        </li>
+                    </ul>
+                </div>
 
-    <div class="card-series" v-for="serie, index in store.series">
-        <!-- Qui ci andaranno le informazioni per ogni serie -->
-        <div>
-            TV SERIES - Informazioni
+                <!-- CARD - DATI SERIES -->
+                <div class="card" v-for="serie, index in store.series">
+                    <div class="img-container">
+                        <img :src="getPoster(serie)" :alt="serie.title">
+                    </div>
+                    <ul>
+                        <li>
+                            Titolo: {{ serie.name }}
+                        </li>
+                        <li>
+                            Titolo originale: {{ serie.original_name }}
+                        </li>
+                        <li>
+                            Lingua: 
+                            <span class="fi" :class=" getFlag (serie)"> 
+                            </span>
+                        </li>
+                        <li>
+                            Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
+                        </li>
+                        <li>
+                            Voto: 
+                            <span v-for="item in stars">
+                                <font-awesome-icon :icon="getStars(item, serie)" /> 
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div>
-            <img :src="getPoster(serie)" :alt="serie.title">
-        </div>
-        <ul>
-            <li>
-                Titolo: {{ serie.name }}
-            </li>
-            <li>
-                Titolo originale: {{ serie.original_name }}
-            </li>
-            <li>
-                Lingua: 
-                <span class="fi" :class=" getFlag (serie)"> 
-                </span>
-            </li>
-            <li>
-                Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
-            </li>
-            <li>
-                Voto: 
-                <span v-for="item in stars">
-                    <font-awesome-icon :icon="getStars(item, serie)" /> 
-                </span>
-            </li>
-        </ul>
-    </div>
+    </main>
 
 </template>
 
 <style lang="scss" scoped>
+@import '../styles/partials/variables.scss';
 
-    .card-movie {
-        margin: 1rem;
-        padding: 1rem;
-        width: 30%;
-        border: 1px dashed black;
+    main {
+        color: $light-color;
 
-        .flag-neutral {
-            background-image: url('https://via.placeholder.com/200x150');
+        div {
+            div {
+                padding: 0.5rem;
+            }
+
+            .card {
+                padding: 1rem;
+                width: calc((100% / 5) - 10px);
+                border: 1px solid $light-color;
+
+                .img-container {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+
         }
     }
-
-    .card-series {
-        margin: 1rem;
-        padding: 1rem;
-        width: 30%;
-        border: 1px dashed black;
-    }
-
+    
 </style>
