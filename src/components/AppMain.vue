@@ -9,54 +9,43 @@ export default {
         }
     },
     methods: {
-        getMovieFlag: function (movie) {
+        getFlag: function (object) {
 
-            console.log(movie.original_language);
+            console.log(object);
 
-            if (movie.original_language == 'en') {
+            if (object.original_language == 'en') {
                 return 'fi-gb'
             }
-            else if (movie.original_language == 'it') {
+            else if (object.original_language == 'it') {
                 return 'fi-it'
             }
-            else if (movie.original_language == 'es') {
+            else if (object.original_language == 'es') {
                 return 'fi-es'
             }
-            else if (movie.original_language == 'ja') {
+            else if (object.original_language == 'ja') {
                 return 'fi-jp'
             }
-            else if (movie.original_language == 'fr') {
+            else if (object.original_language == 'fr') {
                 return 'fi-fr'
             }
             else {
                 return 'flag-neutral'
             }
+
         },
-        getSeriesFlag: function (serie) {
-
-            if (serie.original_language == 'en') {
-                return 'fi-gb'
-            }
-            else if (serie.original_language == 'it') {
-                return 'fi-it'
-            }
-            else if (serie.original_language == 'es') {
-                return 'fi-es'
-            }
-            else if (serie.original_language == 'ja') {
-                return 'fi-jp'
-            }
-            else if (serie.original_language == 'fr') {
-                return 'fi-fr'
+        getPoster: function (obj) {
+            if (obj.poster_path == obj.poster_path + 'null') {
+                return 'https://via.placeholder.com/342x513';
+                
             }
             else {
-                return 'flag-neutral'
+                return this.store.urlFirst + obj.poster_path;
             }
         },
         // Prova trasformazione voto di movie --> il range iniziale è da 0 a 10 non da 1 a 10 (da risolvere)
-        changeVote: function (movie) {
+        changeVote: function (obj) {
            
-           return Math.ceil((movie.vote_average + 1)/ 2);
+           return Math.ceil((obj.vote_average + 1)/ 2);
 
         }
     }
@@ -72,7 +61,8 @@ export default {
             MOVIE - Informazioni
         </div>
         <div>
-            <img :src="store.urlFirst + movie.poster_path" :alt="movie.title">
+            <!-- <img :src="store.urlFirst + movie.poster_path" :alt="movie.title"> -->
+            <img :src="getPoster(movie)" :alt="movie.title">
         </div>
         <ul>
             <li>
@@ -83,7 +73,7 @@ export default {
             </li>
             <li>
                 Lingua: 
-                <span class="fi" :class="getMovieFlag (movie)"> 
+                <span class="fi" :class="getFlag (movie)"> 
                 </span>
             </li>
             <!-- <li>
@@ -112,7 +102,7 @@ export default {
             </li>
             <li>
                 Lingua: 
-                <span class="fi" :class=" getSeriesFlag (serie)"> 
+                <span class="fi" :class=" getFlag (serie)"> 
                 </span>
             </li>
             <li>
