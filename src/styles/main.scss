@@ -33,12 +33,19 @@ a {
 
 .overflow {
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .not-list-style {
     list-style: none;
 }
 
+.p {
+    padding: 1rem;
+}
 
+.not-visible {
+    display: none;
+}
 
 
