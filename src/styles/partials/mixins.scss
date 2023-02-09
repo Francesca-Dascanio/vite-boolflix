@@ -1,0 +1,21 @@
+@use './variables.scss' as *;
+
+@mixin input {
+    padding: 0.5rem;
+    width: 80%;
+    background-color: $dark-color;
+    color: $light-color;
+    font-size: 0.8rem;
+    border: 1px solid gray;
+    border-radius: 5px 0 0 5px;
+}
+
+@mixin button {
+    padding: 0.5rem;
+    width: 20%;
+    border-radius: 0 5px 5px 0;
+    background-color: $dark-color;
+    color: $light-color;
+    border: 1px solid gray;
+    border-left: none;
+}
