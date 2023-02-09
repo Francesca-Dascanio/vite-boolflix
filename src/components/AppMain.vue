@@ -137,10 +137,6 @@ export default {
         padding: 1rem;
         width: 30%;
         border: 1px dashed black;
-
-        .flag-neutral {
-            background-image: url('https://via.placeholder.com/200x150');
-        }
     }
 
 </style>

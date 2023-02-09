@@ -1,0 +1,35 @@
+@import './partials/reset.scss';
+@import './partials/variables.scss';
+
+// REGOLE GENERALI
+// Tag
+a {
+    text-decoration: none;
+    color: $light-color;
+}
+
+
+// Classi
+.bg-color {
+    background-color: $dark-color;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-content-btw {
+    justify-content: space-between;
+}
+
+.not-list-style {
+    list-style: none;
+}
+
+
+

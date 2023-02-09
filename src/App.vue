@@ -38,6 +38,7 @@ export default {
     created () {
         
         // Qui per me ci dovrà andare un set di dati --> ora non ho endpoint per questo
+        // this.getSearch();
     }
 }
 
@@ -52,5 +53,6 @@ export default {
 </template>
 
 <style lang="scss">
+@import './styles/main.scss';
 
 </style>
