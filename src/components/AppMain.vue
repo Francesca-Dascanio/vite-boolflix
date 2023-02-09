@@ -35,6 +35,7 @@ export default {
         },
         getPoster: function (obj) {
             if (obj.poster_path == obj.poster_path + 'null') {
+                // Non funziona perchè null è dentro obj.poster_path --> da sistemare
                 return 'https://via.placeholder.com/342x513';
                 
             }

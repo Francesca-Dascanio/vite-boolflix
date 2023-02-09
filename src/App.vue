@@ -64,6 +64,9 @@ export default {
 
     <AppMain />
 
+    <!-- <font-awesome-icon icon="fa-solid fa-star" />
+    <font-awesome-icon icon="fa-regular fa-star" /> -->
+
 </template>
 
 <style lang="scss">
