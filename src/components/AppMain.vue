@@ -5,13 +5,12 @@ export default {
     name: 'AppMain',
     data () {
         return {
-            store
+            store,
+            stars: [1, 2, 3, 4, 5]
         }
     },
     methods: {
         getFlag: function (object) {
-
-            console.log(object);
 
             if (object.original_language == 'en') {
                 return 'fi-gb'
@@ -43,11 +42,18 @@ export default {
                 return this.store.urlFirst + obj.poster_path;
             }
         },
-        // Prova trasformazione voto di movie --> il range iniziale è da 0 a 10 non da 1 a 10 (da risolvere)
-        changeVote: function (obj) {
-           
-           return Math.ceil((obj.vote_average + 1)/ 2);
+        getStars: function (item, obj) {
 
+            if (item <= Math.ceil((obj.vote_average + 1)/ 2)) {
+
+                return 'fa-solid fa-star';
+
+            }
+            else {
+                return 'fa-regular fa-star';
+            }
+
+            
         }
     }
 }
@@ -77,11 +83,11 @@ export default {
                 <span class="fi" :class="getFlag (movie)"> 
                 </span>
             </li>
-            <!-- <li>
-                Voto: {{ movie.vote_average }}
-            </li> -->
             <li>
-                Voto: {{ changeVote(movie) }}
+                Voto: 
+                <span v-for="item in stars">
+                    <font-awesome-icon :icon="getStars(item, movie)" /> 
+                </span>
             </li>
         </ul>
     </div>
@@ -107,7 +113,13 @@ export default {
                 </span>
             </li>
             <li>
-                Voto: {{ serie.vote_average }}
+                Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
+            </li>
+            <li>
+                Voto: 
+                <span v-for="item in stars">
+                    <font-awesome-icon :icon="getStars(item, serie)" /> 
+                </span>
             </li>
         </ul>
     </div>
