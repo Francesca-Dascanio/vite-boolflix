@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store';
+import axios from 'axios';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default {
@@ -25,6 +26,16 @@ export default {
                 else {
                     return 'fa-regular fa-star';
                 } 
+        },
+        getCast: function () {
+
+            console.log('Sono dentro a GETCAST');
+            axios
+            .get('https://api.themoviedb.org/3/movie/'+ this.element.id + '/credits?api_key=29ab9f66293ac69d30701ab20d25cec2')
+            .then ((response) => {
+                this.store.moviesDetail = response.data.cast;
+                console.log(this.store.moviesDetail);
+            });
         }
     },
     computed: {
@@ -114,8 +125,16 @@ export default {
                     <font-awesome-icon :icon="getStars(item, element)" /> 
                 </span>
             </li>
+            <li>
+                <button @click="getCast()">
+                    More info
+                </button>
+                <!-- Non sta ciclando -->
+                <div v-for="person in store.moviesDetail">
+                    {{ person.name }}
+                </div>
+            </li>
         </ul>
-
     </div>
    
 

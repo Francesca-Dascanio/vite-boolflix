@@ -5,5 +5,7 @@ export const store = reactive ({
     inputSearch: '',
     movies: [],
     series: [],
-    urlFirst: 'https://image.tmdb.org/t/p/w342/'
+    urlFirst: 'https://image.tmdb.org/t/p/w342/',
+    moviesDetail: [],
+    seriesDetail: []
 });
