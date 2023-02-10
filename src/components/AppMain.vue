@@ -82,7 +82,6 @@ export default {
         <div class="bg-color">
             <div class="container flex overflow">
                 <!-- CARD - DATI MOVIES -->
-                <!-- @mouseover="flag = false" @mouseout="flag = true" -->
 
                 <div class="card" v-for="movie, index in store.movies" >
                     <div id="img-container" @click="getHover(movie)"
@@ -127,7 +126,10 @@ export default {
                         <li>
                             <strong>
                                 Vote:
-                            </strong>  
+                            </strong>
+                            <span class="p-span">
+                                {{ Math.ceil((movie.vote_average + 1)/ 2) }}
+                            </span>
                             <span v-for="item in stars">
                                 <font-awesome-icon :icon="getStars(item, movie)" /> 
                             </span>
@@ -146,33 +148,43 @@ export default {
                     </div>
                     <ul class="not-list-style p" @click="getOut(serie)">
                         <li>
-                            Titolo: 
+                            <strong>
+                                Title: 
+                            </strong> 
                             <span>
                                 {{ serie.name }}
                             </span>
                         </li>
                         <li>
-                            Titolo originale: 
+                            <strong>
+                                Original title: 
+                            </strong>
                             <span>
                                 {{ serie.original_name }}
                             </span>
                         </li>
                         <li>
-                            Overview: 
+                            <strong>
+                                Overview: 
+                            </strong>
                             <span>
                                 {{ serie.overview }}
                             </span>
                         </li>
                         <li>
-                            Lingua: 
+                            <strong>
+                                Language: 
+                            </strong>  
                             <span class="fi" :class=" getFlag (serie)"> 
                             </span>
                         </li>
                         <li>
-                            Voto: {{ Math.ceil((serie.vote_average + 1)/ 2) }}
-                        </li>
-                        <li>
-                            Voto: 
+                            <strong>
+                                Vote:
+                            </strong>
+                            <span class="p-span">
+                                {{ Math.ceil((serie.vote_average + 1)/ 2) }}
+                            </span>
                             <span v-for="item in stars">
                                 <font-awesome-icon :icon="getStars(item, serie)" /> 
                             </span>
@@ -225,6 +237,7 @@ export default {
 
                     li {
                         padding: 0.5rem 0;
+
                     }
                 }
             }
