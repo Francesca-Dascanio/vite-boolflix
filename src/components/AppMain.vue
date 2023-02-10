@@ -7,7 +7,8 @@ export default {
     data () {
         return {
             store,
-            stars: [1, 2, 3, 4, 5]
+            stars: [1, 2, 3, 4, 5],
+            isHovered: false,
         }
     },
     methods: {
@@ -46,9 +47,26 @@ export default {
                 return 'fa-regular fa-star';
             } 
         },
-        mouseHover: function (index) {
-            console.log(this.store.movies[index]);
-            // da modificare
+        mouseOver: function (movie) {
+            
+            console.log('DENTRO A MOUSEOVER')
+
+            movie.hovered = this.isHovered;
+            console.log(movie);
+
+            return movie.hovered = true;
+            
+        
+        },
+        mouseOut: function (movie) {
+            
+            console.log('DENTRO A MOUSELEAVE')
+            
+            movie.hovered = this.isHovered;
+            console.log(movie);
+
+            return movie.hovered;
+        
         }
     }
 }
@@ -64,55 +82,18 @@ export default {
 
         <div class="bg-color">
             <div class="container flex overflow">
-                <!-- NUOVA CARD - DATI MOVIES CON HOVER -->
-                <!-- Card con solo img -->
-                <div id="card-img" class="card" v-for="movie, index in store.movies" @mouseover="mouseHover(index)">
-                    <div>
-                        <img :src="getPoster(movie)" :alt="movie.title">
-                    </div>
-                </div>
-
-                <!-- Card all'hover -->
-                <div id="card-hover" class="card not-visible" v-for="info, index in store.movies">
-                    <ul class="not-list-style p">
-                        <li>
-                            Title: 
-                            <span>
-                                {{ info.title }}
-                            </span>
-                        </li>
-                        <li>
-                            Original title: 
-                            <span>
-                                {{ info.original_title }}
-                            </span>
-                        </li>
-                        <li>
-                            Language: 
-                            <span class="fi" :class="getFlag (info)"> 
-                            </span>
-                        </li>
-                        <li>
-                            Vote average: 
-                            <span v-for="item in stars">
-                                <font-awesome-icon :icon="getStars(item, info)" /> 
-                            </span>
-                        </li>
-                        <li>
-                            Overview: 
-                            <span>
-                                {{ info.overview }}
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
                 <!-- CARD - DATI MOVIES -->
-                <!-- <div class="card" v-for="movie, index in store.movies">
-                    <div>
+                <!-- @mouseover="flag = false" @mouseout="flag = true" -->
+
+                <div class="card" v-for="movie, index in store.movies" >
+                    <div id="img-container" @mouseover="mouseOver(movie)" 
+                    :class="{
+                        'not-visible': movie.hovered == true,
+                        '': movie.hovered == false
+                        }" >
                         <img :src="getPoster(movie)" :alt="movie.title">
                     </div>
-                    <ul class="not-list-style">
+                    <ul id="info-container" class="not-list-style p">
                         <li>
                             Titolo: 
                             <span>
@@ -123,6 +104,12 @@ export default {
                             Titolo originale: 
                             <span>
                                 {{ movie.original_title }}
+                            </span>
+                        </li>
+                        <li>
+                            Overview: 
+                            <span>
+                                {{ movie.overview }}
                             </span>
                         </li>
                         <li>
@@ -137,9 +124,9 @@ export default {
                             </span>
                         </li>
                     </ul>
-                </div> -->
+                </div>
 
-                <!-- CARD - DATI SERIES -->
+                <!-- CARD - DATI SERIES
                 <div class="card" v-for="serie, index in store.series">
                     <div class="img-container">
                         <img :src="getPoster(serie)" :alt="serie.title">
@@ -172,7 +159,7 @@ export default {
                             </span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </main>
@@ -210,6 +197,15 @@ export default {
                         max-width: 100%;
                         height: auto;
                         object-fit: cover;
+                    }
+                }
+
+                ul {
+                    width: 342px;
+                    height: 513px;
+
+                    li {
+                        padding: 0.5rem 0;
                     }
                 }
             }
