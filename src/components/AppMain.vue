@@ -7,8 +7,7 @@ export default {
     data () {
         return {
             store,
-            stars: [1, 2, 3, 4, 5],
-            isHovered: false,
+            stars: [1, 2, 3, 4, 5]
         }
     },
     methods: {
@@ -47,25 +46,25 @@ export default {
                 return 'fa-regular fa-star';
             } 
         },
-        mouseOver: function (movie) {
+        getHover: function (obj) {
             
             console.log('DENTRO A MOUSEOVER')
 
-            movie.hovered = this.isHovered;
-            console.log(movie);
+            obj.hovered = false;
+            console.log(obj);
 
-            return movie.hovered = true;
+            return obj.hovered = true;
             
         
         },
-        mouseOut: function (movie) {
+        getOut: function (obj) {
             
-            console.log('DENTRO A MOUSELEAVE')
+            console.log('DENTRO A MOUSEOUT')
             
-            movie.hovered = this.isHovered;
-            console.log(movie);
+            obj.hovered = true;
+            console.log(obj);
 
-            return movie.hovered;
+            return obj.hovered = false;
         
         }
     }
@@ -86,39 +85,49 @@ export default {
                 <!-- @mouseover="flag = false" @mouseout="flag = true" -->
 
                 <div class="card" v-for="movie, index in store.movies" >
-                    <div id="img-container" @mouseover="mouseOver(movie)" 
+                    <div id="img-container" @click="getHover(movie)"
                     :class="{
                         'not-visible': movie.hovered == true,
                         '': movie.hovered == false
                         }" >
                         <img :src="getPoster(movie)" :alt="movie.title">
                     </div>
-                    <ul id="info-container" class="not-list-style p">
+                    <ul id="info-container" class="not-list-style p" @click="getOut(movie)">
                         <li>
-                            Titolo: 
+                            <strong>
+                                Title: 
+                            </strong>
                             <span>
                                 {{ movie.title }}
                             </span>
                         </li>
                         <li>
-                            Titolo originale: 
+                            <strong>
+                                Original title: 
+                            </strong>
                             <span>
                                 {{ movie.original_title }}
                             </span>
                         </li>
                         <li>
-                            Overview: 
+                            <strong>
+                                Overview: 
+                            </strong>
                             <span>
                                 {{ movie.overview }}
                             </span>
                         </li>
                         <li>
-                            Lingua: 
+                            <strong>
+                                Language: 
+                            </strong> 
                             <span class="fi" :class="getFlag (movie)"> 
                             </span>
                         </li>
                         <li>
-                            Voto: 
+                            <strong>
+                                Vote:
+                            </strong>  
                             <span v-for="item in stars">
                                 <font-awesome-icon :icon="getStars(item, movie)" /> 
                             </span>
@@ -126,12 +135,16 @@ export default {
                     </ul>
                 </div>
 
-                <!-- CARD - DATI SERIES
+                <!-- CARD - DATI SERIES -->
                 <div class="card" v-for="serie, index in store.series">
-                    <div class="img-container">
+                    <div class="img-container"  @click="getHover(serie)"
+                        :class="{
+                            'not-visible': serie.hovered == true,
+                            '': serie.hovered == false
+                        }">
                         <img :src="getPoster(serie)" :alt="serie.title">
                     </div>
-                    <ul class="not-list-style">
+                    <ul class="not-list-style p" @click="getOut(serie)">
                         <li>
                             Titolo: 
                             <span>
@@ -142,6 +155,12 @@ export default {
                             Titolo originale: 
                             <span>
                                 {{ serie.original_name }}
+                            </span>
+                        </li>
+                        <li>
+                            Overview: 
+                            <span>
+                                {{ serie.overview }}
                             </span>
                         </li>
                         <li>
@@ -159,7 +178,7 @@ export default {
                             </span>
                         </li>
                     </ul>
-                </div> -->
+                </div>
             </div>
         </div>
     </main>
@@ -195,7 +214,7 @@ export default {
 
                     img {
                         max-width: 100%;
-                        height: auto;
+                        height: 513px;
                         object-fit: cover;
                     }
                 }
