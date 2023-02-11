@@ -1,6 +1,5 @@
 <script>
 import { store } from '../store';
-import axios from 'axios';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default {
@@ -26,16 +25,6 @@ export default {
                 else {
                     return 'fa-regular fa-star';
                 } 
-        },
-        getCast: function () {
-
-            console.log('Sono dentro a GETCAST');
-            axios
-            .get('https://api.themoviedb.org/3/movie/'+ this.element.id + '/credits?api_key=29ab9f66293ac69d30701ab20d25cec2')
-            .then ((response) => {
-                this.store.moviesDetail = response.data.cast;
-                console.log(this.store.moviesDetail);
-            });
         }
     },
     computed: {
@@ -126,12 +115,19 @@ export default {
                 </span>
             </li>
             <li>
-                <button @click="getCast()">
+                <!-- evento click compaiono informazioni -->
+                <button @click="$emit('getInfo')">
                     More info
                 </button>
-                <!-- Non sta ciclando -->
-                <div v-for="person in store.moviesDetail">
-                    {{ person.name }}
+                <div class="cast">
+                    <div class="text-cast">
+                        Cast:
+                    </div>
+                    <ul class="not-list-style p">
+                        <li v-for="person, index in store.moviesDetail">
+                            {{ person.name }}
+                        </li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -165,6 +161,26 @@ export default {
                     }
                 }
 
+#info-container {
+
+        overflow-y: auto;
+
+        button {
+            width: 90%;
+            margin-left: 5%;
+            padding: 0.2rem;
+            text-align: center;
+
+            .cast {
+                width: auto;
+                padding: 0.2rem;
+
+                .text-cast {
+                    width: auto;
+                }
+            }
+        }
 
 
+}
 </style>
