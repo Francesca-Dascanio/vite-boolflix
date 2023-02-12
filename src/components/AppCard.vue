@@ -114,23 +114,26 @@ export default {
                     <font-awesome-icon :icon="getStars(item, element)" /> 
                 </span>
             </li>
-            <li>
-                <!-- evento click compaiono informazioni -->
-                <button @click="$emit('getInfo')">
-                    More info
-                </button>
-                <div class="cast">
-                    <div class="text-cast">
-                        Cast:
-                    </div>
-                    <ul class="not-list-style p">
-                        <li v-for="person, index in store.moviesDetail">
-                            {{ person.name }}
-                        </li>
-                    </ul>
-                </div>
-            </li>
         </ul>
+
+        <!-- chiamata API al padre AppMain -->
+        <button @click="$emit('getInfo'), person.clicked = true">
+            More info
+        </button>
+        <div class="cast"
+        :class="{
+            'not-visible': person.clicked == false,
+            '': person.clicked == true
+        }">
+            <div class="text-cast">
+                Cast:
+            </div>
+            <ul class="not-list-style p">
+                <li v-for="person, index in store.moviesDetail">
+                    {{ person.name }}
+                </li>
+            </ul>
+        </div>
     </div>
    
 
@@ -153,7 +156,7 @@ export default {
 
                 ul {
                     width: 342px;
-                    height: 513px;
+                    // height: 513px;
 
                     li {
                         padding: 0.5rem 0;
@@ -164,23 +167,21 @@ export default {
 #info-container {
 
         overflow-y: auto;
+}
 
-        button {
-            width: 90%;
-            margin-left: 5%;
-            padding: 0.2rem;
-            text-align: center;
+button {
+    width: 90%;
+    margin-left: 5%;
+    padding: 0.2rem;
+    text-align: center;
 
-            .cast {
-                width: auto;
-                padding: 0.2rem;
+    .cast {
+        width: auto;
+        padding: 0.2rem;
 
-                .text-cast {
-                    width: auto;
-                }
-            }
+        .text-cast {
+            width: auto;
         }
-
-
+    }
 }
 </style>

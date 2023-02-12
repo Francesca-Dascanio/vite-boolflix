@@ -15,14 +15,21 @@ export default {
         }
     },
     methods: {
-        getCast: function () {
+        getCast: function (what, id) {
 
             console.log('Sono dentro a GETCAST');
             axios
-            .get('https://api.themoviedb.org/3/movie/'+ this.element.id + '/credits?api_key=29ab9f66293ac69d30701ab20d25cec2')
+            .get('https://api.themoviedb.org/3/'+ what + id + '/credits?api_key=29ab9f66293ac69d30701ab20d25cec2')
             .then ((response) => {
-                this.store.moviesDetail = response.data.cast;
-                console.log('array store.moviesDetail', this.store.moviesDetail);
+                
+                if (what == 'movie/') {
+                        this.store.moviesDetail = response.data.cast;
+                        console.log(this.store.moviesDetail);
+                }
+                else if (what == 'tv/') {
+                        this.store.seriesDetail = response.data.cast;
+                        console.log(this.store.seriesDetail);
+                }
             });
 }
     }
@@ -40,9 +47,9 @@ export default {
         <div class="bg-color">
             <div class="container flex overflow">
 
-                <AppCard v-for="movie, index in store.movies" :element="movie" class="card" @getInfo="getCast()" />
+                <AppCard v-for="movie, index in store.movies" :element="movie" class="card" @getInfo="getCast('movie/', movie.id)" />
 
-                <AppCard v-for="serie, index in store.series" :element="serie" class="card" />
+                <AppCard v-for="serie, index in store.series" :element="serie" class="card" @getInfo="getCast('tv/', serie.id)" />
 
             </div>
         </div>
