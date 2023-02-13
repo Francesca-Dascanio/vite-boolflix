@@ -25,6 +25,10 @@ export default {
                 else {
                     return 'fa-regular fa-star';
                 } 
+        },
+        getFive: function () {
+            const slicedArray = this.store.moviesDetail.slice(0, 5);
+            return slicedArray;
         }
     },
     computed: {
@@ -48,6 +52,10 @@ export default {
                     return this.store.urlFirst + this.element.poster_path;
                 }
         },
+        five () {
+            const slicedArray = this.store.moviesDetail.slice(0, 5);
+            return slicedArray;
+        }
     }
 }
 
@@ -67,73 +75,69 @@ export default {
         </div>
 
         <!-- Informazioni -->
-        <ul id="info-container" class="not-list-style p" @click="element.hovered = false"
+        <div id="info-container">
+            <ul class="not-list-style p" @click="element.hovered = false"
             :class="{
             'not-visible': element.hovered == false,
             '': element.hovered == true
             }" >
-            <li>
-                <strong>
-                    Title: 
-                </strong>
-                <span>
-                    {{ element.title || element.name }}
-                </span>
-            </li>
-            <li>
-                <strong>
-                    Original title: 
-                </strong>
-                <span>
-                    {{ element.original_title || element.original_name }}
-                </span>
-            </li>
-            <li>
-                <strong>
-                    Overview: 
-                </strong>
-                <span>
-                    {{ element.overview }}
-                </span>
-            </li>
-            <li>
-                <strong>
-                    Language: 
-                </strong> 
-                <span class="fi" :class="flag"> 
-                </span>
-            </li>
-            <li>
-                <strong>
-                    Vote:
-                </strong>
-                <span class="p-span">
-                    {{ Math.ceil((element.vote_average + 1)/ 2) }}
-                </span>
-                <span v-for="item in stars">
-                    <font-awesome-icon :icon="getStars(item, element)" /> 
-                </span>
-            </li>
-        </ul>
-
-        <!-- chiamata API al padre AppMain -->
-        <button @click="$emit('getInfo'), person.clicked = true">
-            More info
-        </button>
-        <div class="cast"
-        :class="{
-            'not-visible': person.clicked == false,
-            '': person.clicked == true
-        }">
-            <div class="text-cast">
-                Cast:
-            </div>
-            <ul class="not-list-style p">
-                <li v-for="person, index in store.moviesDetail">
-                    {{ person.name }}
+                <li>
+                    <strong>
+                        Title: 
+                    </strong>
+                    <span>
+                        {{ element.title || element.name }}
+                    </span>
+                </li>
+                <li>
+                    <strong>
+                        Original title: 
+                    </strong>
+                    <span>
+                        {{ element.original_title || element.original_name }}
+                    </span>
+                </li>
+                <li>
+                    <strong>
+                        Overview: 
+                    </strong>
+                    <span>
+                        {{ element.overview }}
+                    </span>
+                </li>
+                <li>
+                    <strong>
+                        Language: 
+                    </strong> 
+                    <span class="fi" :class="flag"> 
+                    </span>
+                </li>
+                <li>
+                    <strong>
+                        Vote:
+                    </strong>
+                    <span class="p-span">
+                        {{ Math.ceil((element.vote_average + 1)/ 2) }}
+                    </span>
+                    <span v-for="item in stars">
+                        <font-awesome-icon :icon="getStars(item, element)" /> 
+                    </span>
                 </li>
             </ul>
+
+            <!-- chiamata API al padre AppMain -->
+            <button @click="$emit('getInfo')">
+                More info
+            </button>
+            <div class="cast">
+                <ul class="not-list-style p">
+                    <li v-for="person, index in five">
+                        {{ person.name }}
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </div>
    
 
@@ -156,7 +160,7 @@ export default {
 
                 ul {
                     width: 342px;
-                    // height: 513px;
+                    height: auto;
 
                     li {
                         padding: 0.5rem 0;
